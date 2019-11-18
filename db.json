@@ -1,46 +1,8 @@
 {
   "tasks": [
-    {
-      "client": "Amex",
-      "task": "E1",
-      "desc": "dev",
-      "id": "e686f1e4-173b-4e6b-bfdc-7e5c34050e6e",
-      "startTime": "2019-11-18T18:52:52+05:30",
-      "endTime": null
-    },
-    {
-      "client": "Amex",
-      "task": "E2",
-      "desc": "test",
-      "id": "99dbc40e-335b-4013-b1f4-7822ec761f23",
-      "startTime": null,
-      "endTime": null
-    }
+    
   ],
   "sessions": [
-    {
-      "id": "be008730-d815-444e-84fb-2a275677d916",
-      "taskId": "99dbc40e-335b-4013-b1f4-7822ec761f23",
-      "startTime": "2019-11-18T18:48:10+05:30",
-      "endTime": "2019-11-18T18:48:29+05:30"
-    },
-    {
-      "id": "6273e1e0-b6c6-4db5-a2c8-2b808e94f0a9",
-      "taskId": "e686f1e4-173b-4e6b-bfdc-7e5c34050e6e",
-      "startTime": "2019-11-18T18:48:44+05:30",
-      "endTime": "2019-11-18T18:49:23+05:30"
-    },
-    {
-      "id": "16d45da0-7540-404e-914c-d7905fbdc028",
-      "taskId": "e686f1e4-173b-4e6b-bfdc-7e5c34050e6e",
-      "startTime": "2019-11-18T18:49:57+05:30",
-      "endTime": "2019-11-18T18:50:00+05:30"
-    },
-    {
-      "id": "21c9eba2-e424-43a7-8095-042a069fc947",
-      "taskId": "e686f1e4-173b-4e6b-bfdc-7e5c34050e6e",
-      "startTime": null,
-      "endTime": "2019-11-18T18:51:40+05:30"
-    }
+    
   ]
 }
