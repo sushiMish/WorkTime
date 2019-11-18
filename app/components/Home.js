@@ -38,6 +38,7 @@ export default function Home ({ tasks, saveTask, fetchTasks }) {
         variant='outlined'
         autoComplete='wt-client'
         className={classes.fab}
+        value={client}
         onChange={e => setClient(e.target.value)}
       />
       &nbsp;
@@ -49,6 +50,7 @@ export default function Home ({ tasks, saveTask, fetchTasks }) {
         variant='outlined'
         autoComplete='wt-task'
         className={classes.fab}
+        value={task}
         onChange={e => setTask(e.target.value)}
       />
       &nbsp;
@@ -60,6 +62,7 @@ export default function Home ({ tasks, saveTask, fetchTasks }) {
         variant='outlined'
         autoComplete='wt-desc'
         className={classes.fab}
+        value={desc}
         onChange={e => setDesc(e.target.value)}
       />
       <Fab
