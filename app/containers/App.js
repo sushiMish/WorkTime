@@ -1,15 +1,102 @@
-// @flow
-import * as React from 'react';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import AppBar from '@material-ui/core/AppBar'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import HomeIcon from '@material-ui/icons/Home'
+import ReportIcon from '@material-ui/icons/Report'
+import HelpIcon from '@material-ui/icons/Help'
+import { withRouter } from 'react-router-dom'
+import routes from '../constants/routes'
 
-type Props = {
-  children: React.Node
-};
+const drawerWidth = 240
 
-export default class App extends React.Component<Props> {
-  props: Props;
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex'
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  },
+  toolbar: theme.mixins.toolbar
+}))
 
-  render() {
-    const { children } = this.props;
-    return <React.Fragment>{children}</React.Fragment>;
-  }
-}
+export default withRouter(function App (props) {
+  const classes = useStyles()
+  let history = props.history
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position='fixed' className={classes.appBar}>
+        <Toolbar>
+          <Typography variant='h6' noWrap>
+            WorkTime
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant='permanent'
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <div className={classes.toolbar} />
+        <List>
+          <ListItem
+            button
+            onClick={e => history.push(routes.HOME)}
+            selected={routes.HOME == history.location.pathname}
+          >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary='Home' />
+          </ListItem>
+          <ListItem
+            button
+            onClick={e => history.push(routes.REPORTS)}
+            selected={routes.REPORTS == history.location.pathname}
+          >
+            <ListItemIcon>
+              <ReportIcon />
+            </ListItemIcon>
+            <ListItemText primary='Report' />
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <HelpIcon />
+            </ListItemIcon>
+            <ListItemText primary='Help' />
+          </ListItem>
+        </List>
+      </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <React.Fragment>{props.children}</React.Fragment>
+      </main>
+    </div>
+  )
+})
