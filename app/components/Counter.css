@@ -21,7 +21,6 @@
 .btn {
   font-size: 1.6rem;
   font-weight: bold;
-  background-color: #fff;
   border-radius: 50%;
   margin: 10px;
   width: 100px;
@@ -32,6 +31,5 @@
 }
 
 .btn:hover {
-  color: white;
   background-color: rgba(0, 0, 0, 0.5);
 }
