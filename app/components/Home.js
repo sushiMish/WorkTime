@@ -11,9 +11,9 @@ import TableCell from '@material-ui/core/TableCell'
 
 import AddIcon from '@material-ui/icons/Add'
 import StartIcon from '@material-ui/icons/PlayArrow'
+import StopIcon from '@material-ui/icons/Stop'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { makeStyles } from '@material-ui/core/styles'
-const uuidv4 = require('uuid/v4')
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -21,14 +21,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Home ({ tasks, saveTask, fetchTasks }) {
+export default function Home ({
+  tasks,
+  saveTask,
+  fetchTasks,
+  startTask,
+  stopTask
+}) {
   const classes = useStyles()
 
   const [client, setClient] = useState('')
   const [task, setTask] = useState('')
   const [desc, setDesc] = useState('')
 
-  fetchTasks();
+  fetchTasks()
 
   return (
     <div>
@@ -72,10 +78,10 @@ export default function Home ({ tasks, saveTask, fetchTasks }) {
         aria-label='add'
         className={classes.fab}
         onClick={e => {
-          saveTask({ id: uuidv4(), client, task, desc });
-          setClient('');
-          setTask('');
-          setDesc('');
+          saveTask({ client, task, desc })
+          setClient('')
+          setTask('')
+          setDesc('')
         }}
       >
         <AddIcon />
@@ -86,25 +92,45 @@ export default function Home ({ tasks, saveTask, fetchTasks }) {
           <TableHead>
             <TableRow>
               <TableCell>Client</TableCell>
-              <TableCell align='right'>Task</TableCell>
-              <TableCell align='right'>Description</TableCell>
-              <TableCell align='right'>Actions</TableCell>
+              <TableCell align='left'>Task</TableCell>
+              <TableCell align='left'>Description</TableCell>
+              <TableCell align='left'>Status</TableCell>
+              <TableCell align='left'>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {tasks.map(row => (
               <TableRow key={row.id}>
-                <TableCell component='th' scope='row'>
+                <TableCell align='left' component='th' scope='row'>
                   {row.client}
                 </TableCell>
-                <TableCell align='right'>{row.task}</TableCell>
-                <TableCell align='right'>{row.desc}</TableCell>
-                <TableCell align='right' >
-                  <Fab color="primary" size="small">
-                    <StartIcon />
-                  </Fab>
+                <TableCell align='left'>{row.task}</TableCell>
+                <TableCell align='left'>{row.desc}</TableCell>
+                <TableCell align='left'>
+                  {row.startTime && !row.endTime
+                    ? 'In Progress'
+                    : 'Yet to Start'}
+                </TableCell>
+                <TableCell align='left'>
+                  {row.startTime && !row.endTime ? (
+                    <Fab
+                      color='primary'
+                      size='small'
+                      onClick={e => stopTask(row.id)}
+                    >
+                      <StopIcon />
+                    </Fab>
+                  ) : (
+                    <Fab
+                      color='primary'
+                      size='small'
+                      onClick={e => startTask(row.id)}
+                    >
+                      <StartIcon />
+                    </Fab>
+                  )}
                   &nbsp;
-                  <Fab color="secondary" size="small">
+                  <Fab color='secondary' size='small'>
                     <DeleteIcon />
                   </Fab>
                 </TableCell>
