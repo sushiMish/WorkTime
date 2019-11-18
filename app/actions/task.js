@@ -1,3 +1,5 @@
+import { saveSession } from './session';
+
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
@@ -42,7 +44,7 @@ export const startTask = taskId => {
 export const stopTask = taskId => {
   const endTime = moment().format()
   return (dispatch: Dispatch) => {
-    const { startTime, task, desc } = db
+    const { startTime, client, task, desc } = db
       .get('tasks')
       .find({ id: taskId })
       .value()
@@ -52,16 +54,7 @@ export const stopTask = taskId => {
       .assign({ startTime: undefined, endTime: undefined })
       .write()
 
-    db.get('sessions')
-      .push({
-        id: uuidv4(),
-        taskId,
-        startTime,
-        endTime,
-        task,
-        desc
-      })
-      .write()
+    dispatch(saveSession({taskId, client, task, desc, startTime, endTime}));
 
     dispatch(fetchTasks())
   }

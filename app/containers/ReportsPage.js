@@ -1,16 +1,16 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Reports from '../components/Reports';
-import * as CounterActions from '../actions/counter';
+import * as sessionActions from '../actions/session';
 
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    sessions: state.session.sessions === null ? sessionActions.getSessions() : state.session.sessions
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CounterActions, dispatch);
+  return bindActionCreators(sessionActions, dispatch);
 }
 
 export default connect(
