@@ -42,14 +42,14 @@ export const startTask = taskId => {
 export const stopTask = taskId => {
   const endTime = moment().format()
   return (dispatch: Dispatch) => {
-    const startTime = db
+    const { startTime, task, desc } = db
       .get('tasks')
       .find({ id: taskId })
-      .value().startTime
+      .value()
 
     db.get('tasks')
       .find({ id: taskId })
-      .assign({ startTime: null, endTime: null })
+      .assign({ startTime: undefined, endTime: undefined })
       .write()
 
     db.get('sessions')
@@ -57,7 +57,9 @@ export const stopTask = taskId => {
         id: uuidv4(),
         taskId,
         startTime,
-        endTime
+        endTime,
+        task,
+        desc
       })
       .write()
 
