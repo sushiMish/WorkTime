@@ -34,8 +34,6 @@ export default function Home ({
   const [task, setTask] = useState('')
   const [desc, setDesc] = useState('')
 
-  fetchTasks()
-
   return (
     <div>
       <TextField

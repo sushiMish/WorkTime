@@ -5,7 +5,7 @@ import * as taskActions from '../actions/task'
 
 function mapStateToProps (state) {
   return {
-    tasks: state.task.tasks
+    tasks: state.task.tasks === null ? taskActions.getTasks() : state.task.tasks
   }
 }
 

@@ -7,13 +7,13 @@ const moment = require('moment')
 
 export const FETCH_TASKS = 'FETCH_TASKS'
 
-export const fetchTasks = () => {
-  return (dispatch: Dispatch) => {
-    const tasks = db.get('tasks').value()
-    dispatch({
-      type: FETCH_TASKS,
-      tasks
-    })
+export const getTasks = () => db.get('tasks').value()
+
+const fetchTasks = () => {
+  const tasks = getTasks();
+  return {
+    type: FETCH_TASKS,
+    tasks
   }
 }
 
@@ -23,7 +23,7 @@ export const saveTask = task => {
       .push({ ...task, id: uuidv4() })
       .write()
 
-    fetchTasks()
+    dispatch(fetchTasks())
   }
 }
 
@@ -35,7 +35,7 @@ export const startTask = taskId => {
       .assign({ startTime, endTime: null })
       .write()
 
-    fetchTasks()
+    dispatch(fetchTasks())
   }
 }
 
@@ -61,6 +61,6 @@ export const stopTask = taskId => {
       })
       .write()
 
-    fetchTasks()
+    dispatch(fetchTasks())
   }
 }
