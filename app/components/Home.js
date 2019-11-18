@@ -10,6 +10,8 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 
 import AddIcon from '@material-ui/icons/Add'
+import StartIcon from '@material-ui/icons/PlayArrow'
+import DeleteIcon from '@material-ui/icons/Delete'
 import { makeStyles } from '@material-ui/core/styles'
 const uuidv4 = require('uuid/v4')
 
@@ -97,7 +99,15 @@ export default function Home ({ tasks, saveTask, fetchTasks }) {
                 </TableCell>
                 <TableCell align='right'>{row.task}</TableCell>
                 <TableCell align='right'>{row.desc}</TableCell>
-                <TableCell align='right' />
+                <TableCell align='right' >
+                  <Fab color="primary" size="small">
+                    <StartIcon />
+                  </Fab>
+                  &nbsp;
+                  <Fab color="secondary" size="small">
+                    <DeleteIcon />
+                  </Fab>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
