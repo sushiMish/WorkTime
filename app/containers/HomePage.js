@@ -1,13 +1,19 @@
-// @flow
-import React, { Component } from 'react';
-import Home from '../components/Home';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Home from '../components/Home'
+import * as taskActions from '../actions/task'
 
-type Props = {};
-
-export default class HomePage extends Component<Props> {
-  props: Props;
-
-  render() {
-    return <Home />;
+function mapStateToProps (state) {
+  return {
+    tasks: state.task.tasks
   }
 }
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators(taskActions, dispatch)
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
