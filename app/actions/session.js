@@ -1,7 +1,4 @@
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('db.json')
-const db = low(adapter)
+import db from '../db';
 const uuidv4 = require('uuid/v4')
 const moment = require('moment')
 
@@ -25,19 +22,17 @@ export const saveSession = ({
   startTime,
   endTime
 }) => {
-  return (dispatch: Dispatch) => {
-    db.get('sessions')
-      .push({
-        id: uuidv4(),
-        taskId,
-        startTime,
-        endTime,
-        client,
-        task,
-        desc
-      })
-      .write()
+  db.get('sessions')
+    .push({
+      id: uuidv4(),
+      taskId,
+      startTime,
+      endTime,
+      client,
+      task,
+      desc
+    })
+    .write()
 
-    dispatch(fetchSessions())
-  }
+  return fetchSessions();
 }

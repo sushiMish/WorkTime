@@ -1,9 +1,5 @@
 import { saveSession } from './session';
-
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync('db.json')
-const db = low(adapter)
+import db from '../db';
 const uuidv4 = require('uuid/v4')
 const moment = require('moment')
 
