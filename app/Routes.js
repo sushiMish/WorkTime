@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import routes from './constants/routes'
 import App from './containers/App'
 import HomePage from './containers/HomePage'
@@ -10,7 +10,8 @@ export default (props) => (
     <App history={props.history}>
       <Switch>
         <Route path={routes.REPORTS} component={ReportsPage} />
-        <Route path={routes.HOME} component={HomePage} />
+        <Route exact path={routes.HOME} component={HomePage} />
+        <Route component= {() => <Redirect to={routes.HOME}/> }/>
       </Switch>
     </App>
   </Router>
