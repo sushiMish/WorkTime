@@ -14,6 +14,7 @@ import StartIcon from '@material-ui/icons/PlayArrow'
 import StopIcon from '@material-ui/icons/Stop'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { makeStyles } from '@material-ui/core/styles'
+import Moment from 'react-moment';
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -106,8 +107,8 @@ export default function Home ({
                 <TableCell align='left'>{row.desc}</TableCell>
                 <TableCell align='left'>
                   {row.startTime && !row.endTime
-                    ? 'In Progress'
-                    : 'Yet to Start'}
+                    ? <div>In Progress for <Moment fromNow ago>{row.startTime}</Moment></div>
+                    : <div>Yet to Start</div>}
                 </TableCell>
                 <TableCell align='left'>
                   {row.startTime && !row.endTime ? (

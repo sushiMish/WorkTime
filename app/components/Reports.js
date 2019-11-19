@@ -6,11 +6,12 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
+import Divider from '@material-ui/core/Divider'
 
 export default ({ sessions }) => {
   return (
-    <div>
-      Sessions
+    <div> 
+      <h4>Previous sessions</h4>
       <Paper>
         <Table aria-label='simple table'>
           <TableHead>
