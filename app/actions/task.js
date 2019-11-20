@@ -55,3 +55,13 @@ export const stopTask = taskId => {
     dispatch(fetchTasks())
   }
 }
+
+export const deleteTask = task => {
+  return (dispatch: Dispatch) => {
+    db.get('tasks')
+      .pop({ ...task, id: uuidv4() })
+      .write()
+
+    dispatch(fetchTasks())
+  }
+}

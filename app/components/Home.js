@@ -27,7 +27,8 @@ export default function Home ({
   saveTask,
   fetchTasks,
   startTask,
-  stopTask
+  stopTask,
+  deleteTask
 }) {
   const classes = useStyles()
 
@@ -129,7 +130,8 @@ export default function Home ({
                     </Fab>
                   )}
                   &nbsp;
-                  <Fab color='secondary' size='small'>
+                  <Fab color='secondary' size='small'
+                  onClick ={e => deleteTask(row.id)}>
                     <DeleteIcon />
                   </Fab>
                 </TableCell>
