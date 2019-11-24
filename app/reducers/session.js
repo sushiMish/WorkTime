@@ -8,7 +8,7 @@ export default function counter(state = { sessions: null }, action: Action) {
       return {
         ...state,
         sessions: Array.from(action.sessions)
-      }
+      };
     default:
       return state;
   }

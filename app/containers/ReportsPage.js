@@ -5,7 +5,10 @@ import * as sessionActions from '../actions/session';
 
 function mapStateToProps(state) {
   return {
-    sessions: state.session.sessions === null ? sessionActions.getSessions() : state.session.sessions
+    sessions:
+      state.session.sessions === null
+        ? sessionActions.getSessions()
+        : state.session.sessions
   };
 }
 

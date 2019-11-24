@@ -1,18 +1,18 @@
 import db from '../db';
-const uuidv4 = require('uuid/v4')
-const moment = require('moment')
 
-export const FETCH_SESSIONS = 'FETCH_SESSIONS'
+const uuidv4 = require('uuid/v4');
 
-export const getSessions = () => db.get('sessions').value()
+export const FETCH_SESSIONS = 'FETCH_SESSIONS';
+
+export const getSessions = () => db.get('sessions').value();
 
 const fetchSessions = () => {
-  const sessions = getSessions()
+  const sessions = getSessions();
   return {
     type: FETCH_SESSIONS,
     sessions
-  }
-}
+  };
+};
 
 export const saveSession = ({
   taskId,
@@ -32,7 +32,7 @@ export const saveSession = ({
       task,
       desc
     })
-    .write()
+    .write();
 
   return fetchSessions();
-}
+};

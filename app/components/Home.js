@@ -1,137 +1,147 @@
-import React, { useState } from 'react'
-import TextField from '@material-ui/core/TextField'
-import Divider from '@material-ui/core/Divider'
-import Fab from '@material-ui/core/Fab'
-import Paper from '@material-ui/core/Paper'
-import Table from '@material-ui/core/Table'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
+/* eslint react/prop-types: 0 */
+import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
+import Fab from '@material-ui/core/Fab';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
 
-import AddIcon from '@material-ui/icons/Add'
-import StartIcon from '@material-ui/icons/PlayArrow'
-import StopIcon from '@material-ui/icons/Stop'
-import DeleteIcon from '@material-ui/icons/Delete'
-import { makeStyles } from '@material-ui/core/styles'
+import AddIcon from '@material-ui/icons/Add';
+import StartIcon from '@material-ui/icons/PlayArrow';
+import StopIcon from '@material-ui/icons/Stop';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { makeStyles } from '@material-ui/core/styles';
 import Moment from 'react-moment';
 
 const useStyles = makeStyles(theme => ({
   fab: {
     margin: theme.spacing(1)
   }
-}))
+}));
 
-export default function Home ({
+export default function Home({
   tasks,
   saveTask,
-  fetchTasks,
   startTask,
   stopTask,
   deleteTask
 }) {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [client, setClient] = useState('')
-  const [task, setTask] = useState('')
-  const [desc, setDesc] = useState('')
+  const [client, setClient] = useState('');
+  const [task, setTask] = useState('');
+  const [desc, setDesc] = useState('');
 
   return (
     <div>
       <TextField
-        id='wt-client'
-        label='Client'
-        type='text'
-        margin='normal'
-        variant='outlined'
-        autoComplete='wt-client'
+        id="wt-client"
+        label="Client"
+        type="text"
+        margin="normal"
+        variant="outlined"
+        autoComplete="wt-client"
         className={classes.fab}
         value={client}
         onChange={e => setClient(e.target.value)}
       />
       &nbsp;
       <TextField
-        id='wt-task'
-        label='Task'
-        type='text'
-        margin='normal'
-        variant='outlined'
-        autoComplete='wt-task'
+        id="wt-task"
+        label="Task"
+        type="text"
+        margin="normal"
+        variant="outlined"
+        autoComplete="wt-task"
         className={classes.fab}
         value={task}
         onChange={e => setTask(e.target.value)}
       />
       &nbsp;
       <TextField
-        id='wt-desc'
-        label='Description'
-        type='text'
-        margin='normal'
-        variant='outlined'
-        autoComplete='wt-desc'
+        id="wt-desc"
+        label="Description"
+        type="text"
+        margin="normal"
+        variant="outlined"
+        autoComplete="wt-desc"
         className={classes.fab}
         value={desc}
         onChange={e => setDesc(e.target.value)}
       />
       <Fab
-        color='primary'
-        aria-label='add'
+        color="primary"
+        aria-label="add"
         className={classes.fab}
-        onClick={e => {
-          saveTask({ client, task, desc })
-          setClient('')
-          setTask('')
-          setDesc('')
+        onClick={() => {
+          saveTask({ client, task, desc });
+          setClient('');
+          setTask('');
+          setDesc('');
         }}
       >
         <AddIcon />
       </Fab>
       <Divider />
       <Paper className={classes.fab}>
-        <Table aria-label='simple table'>
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Client</TableCell>
-              <TableCell align='left'>Task</TableCell>
-              <TableCell align='left'>Description</TableCell>
-              <TableCell align='left'>Status</TableCell>
-              <TableCell align='left'>Actions</TableCell>
+              <TableCell align="left">Task</TableCell>
+              <TableCell align="left">Description</TableCell>
+              <TableCell align="left">Status</TableCell>
+              <TableCell align="left">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {tasks.map(row => (
               <TableRow key={row.id}>
-                <TableCell align='left' component='th' scope='row'>
+                <TableCell align="left" component="th" scope="row">
                   {row.client}
                 </TableCell>
-                <TableCell align='left'>{row.task}</TableCell>
-                <TableCell align='left'>{row.desc}</TableCell>
-                <TableCell align='left'>
-                  {row.startTime && !row.endTime
-                    ? <div>In Progress for <Moment fromNow ago>{row.startTime}</Moment></div>
-                    : <div>Yet to Start</div>}
+                <TableCell align="left">{row.task}</TableCell>
+                <TableCell align="left">{row.desc}</TableCell>
+                <TableCell align="left">
+                  {row.startTime && !row.endTime ? (
+                    <div>
+                      In Progress for{' '}
+                      <Moment fromNow ago>
+                        {row.startTime}
+                      </Moment>
+                    </div>
+                  ) : (
+                    <div>Yet to Start</div>
+                  )}
                 </TableCell>
-                <TableCell align='left'>
+                <TableCell align="left">
                   {row.startTime && !row.endTime ? (
                     <Fab
-                      color='primary'
-                      size='small'
-                      onClick={e => stopTask(row.id)}
+                      color="primary"
+                      size="small"
+                      onClick={() => stopTask(row.id)}
                     >
                       <StopIcon />
                     </Fab>
                   ) : (
                     <Fab
-                      color='primary'
-                      size='small'
-                      onClick={e => startTask(row.id)}
+                      color="primary"
+                      size="small"
+                      onClick={() => startTask(row.id)}
                     >
                       <StartIcon />
                     </Fab>
                   )}
                   &nbsp;
-                  <Fab color='secondary' size='small'
-                  onClick ={e => deleteTask(row.id)}>
+                  <Fab
+                    color="secondary"
+                    size="small"
+                    onClick={() => deleteTask(row.id)}
+                  >
                     <DeleteIcon />
                   </Fab>
                 </TableCell>
@@ -141,5 +151,5 @@ export default function Home ({
         </Table>
       </Paper>
     </div>
-  )
+  );
 }
