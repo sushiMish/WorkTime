@@ -8,11 +8,12 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import Divider from '@material-ui/core/Divider';
+import Moment from 'react-moment';
 
 export default ({ sessions }) => (
   <div>
     <h4>Sessions</h4>
-    <Divider />;
+    <Divider />
     <Paper>
       <Table aria-label="simple table">
         <TableHead>
@@ -20,8 +21,8 @@ export default ({ sessions }) => (
             <TableCell>Client</TableCell>
             <TableCell align="left">Task</TableCell>
             <TableCell align="left">Description</TableCell>
-            <TableCell align="left">Start Time</TableCell>
-            <TableCell align="left">End Time</TableCell>
+            <TableCell align="left">Date</TableCell>
+            <TableCell align="left">Duration</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -32,8 +33,12 @@ export default ({ sessions }) => (
               </TableCell>
               <TableCell align="left">{row.task}</TableCell>
               <TableCell align="left">{row.desc}</TableCell>
-              <TableCell align="left">{row.startTime}</TableCell>
-              <TableCell align="left">{row.endTime}</TableCell>
+              <TableCell align="left">
+                <Moment format="dddd, MMMM Do YYYY">{row.startTime}</Moment>
+              </TableCell>
+              <TableCell align="left">
+                <Moment duration={row.startTime} date={row.endTime} />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
