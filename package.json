@@ -57,8 +57,8 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "WorkTime",
+    "appId": "com.vibe.WorkTime",
     "files": [
       "app/dist/",
       "app/app.html",
