@@ -228,7 +228,7 @@
     "electron-updater": "^3.2.3",
     "history": "^4.7.2",
     "lowdb": "^1.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-hot-loader": "^4.8",
